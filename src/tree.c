@@ -1,7 +1,40 @@
 #include "tree.h"
 
+node* node_array[MAX_NODE_NUM];
+int nodes_count = 0;
+
+void push_node_to_array(node* _node){
+	/*for(int i = 0; i < MAX_NODE_NUM; i++){
+		if(node_array[i] == NULL){
+			node_array[i] = _node;
+#ifdef DEBUG
+			printf("Added node #%d\n", i);
+#endif
+			return;
+		}
+	}*/
+	if(nodes_count == MAX_NODE_NUM){
+		printf("Error: too many nodes in tree\n");
+		exit(1);
+	}
+	node_array[nodes_count++] = _node;
+#ifdef DEBUG
+	printf("Added node #%d:%x\n", nodes_count-1, _node);
+#endif
+}
+
+void delete_all_nodes(){
+	for(int i = 0; i < nodes_count; i++){
+		free(node_array[i]);
+#ifdef DEBUG
+		printf("Deleted node #%d\n", i);
+#endif
+	}
+}
+
 node* add_child(node* parent, enum NODE_TYPE type, enum NODE_CHILD child_dest) {
 	node* child = (node*)malloc(sizeof(node));
+	push_node_to_array(child);
 	if (child_dest == nc_LEFT)
 		parent->m_child_left = child;
 	else
@@ -13,6 +46,7 @@ node* add_child(node* parent, enum NODE_TYPE type, enum NODE_CHILD child_dest) {
 }
 
 node* add_child_ptr(node* parent, node* child, enum NODE_CHILD child_dest) {
+	//push_node_to_array(child);
 	if (child_dest == nc_LEFT)
 		parent->m_child_left = child;
 	else
@@ -54,8 +88,8 @@ void replace_node(node* source_node, node* dst_node, enum NODE_CHILD dst_branch,
 	else
 		dst_parent->m_child_right = source_node;
 
-	delete_node(removed_branch);
-	delete_node(dst_node);
+	//delete_node(removed_branch);
+	//delete_node(dst_node);
 	
 
 }

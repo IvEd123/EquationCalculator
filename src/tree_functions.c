@@ -48,6 +48,7 @@ static void configure_node(node* _node, char symbol[], token token) {
 
 static node* create_node_from_break(token* token_array, char** symbols, int* priority_map, int length) {
 	node* _node = (node*)malloc(sizeof(node));
+	push_node_to_array(_node);
 	_node->m_child_left = (node*)malloc(sizeof(node));
 	_node->m_child_right = (node*)malloc(sizeof(node));
 

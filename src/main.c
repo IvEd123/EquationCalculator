@@ -33,12 +33,12 @@ float calculate_equation(char* raw_input) {
 	float result = solve(root);
 
 
-	delete_node(root);
+	//delete_node(root);
 	for(int i = 0; i < parsed_symbols_num; i++)
 		free(parsed_symbols_array[i]);
 	free(parsed_symbols_array);
 	free(token_array);
-
+	delete_all_nodes();
 
 	return result;
 }

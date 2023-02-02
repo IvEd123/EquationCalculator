@@ -30,6 +30,10 @@ typedef struct node {
 	
 } node;
 
+void push_node_to_array(node*);
+
+void delete_all_nodes();
+
 node* add_child(node* parent, enum NODE_TYPE type, enum NODE_CHILD child_dest);
 
 node* add_child_ptr(node* parent, node* child, enum NODE_CHILD child_dest);
